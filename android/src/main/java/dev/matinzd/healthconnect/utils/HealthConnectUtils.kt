@@ -86,9 +86,10 @@ fun ReadableMap.getSafeDouble(key: String, default: Double): Double {
   return if (this.hasKey(key)) this.getDouble(key) else default
 }
 
-fun ReadableMap.getTimeRangeFilter(key: String? = null): TimeRangeFilter {
-  val timeRangeFilter = if (key != null) this.getMap(key)
+fun ReadableMap?.getTimeRangeFilter(key: String? = null): TimeRangeFilter {
+  val timeRangeFilter = if (key != null) this?.getMap(key)
     ?: throw Exception("Time range filter should be provided") else this
+    ?: throw Exception("Time range filter should be provided")
 
   val operator = timeRangeFilter.getString("operator")
 
